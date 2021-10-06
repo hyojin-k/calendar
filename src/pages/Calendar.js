@@ -3,6 +3,7 @@ import FullCalendar from '@fullcalendar/react'
 // import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 
 import { useSelector } from 'react-redux';
@@ -16,7 +17,7 @@ const Calendar = (props) => {
   return (
     <React.Fragment>
       <FullCalendar
-        plugins={[dayGridPlugin, timeGridPlugin,listPlugin]}
+        plugins={[dayGridPlugin, timeGridPlugin,listPlugin, interactionPlugin]}
         initialView="dayGridMonth"
         height = '100vh'
         events={
