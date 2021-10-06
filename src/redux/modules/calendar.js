@@ -13,14 +13,17 @@ const addPlan = createAction(ADD_PLAN, (plan) => ({plan}));
 
 // initialState
 const initialState ={
-    list:[],
+    list:[
+        {title: 'event 1', date: '2021-10-01 10:00:00'},
+        {title: '코딩하기', date: '2021-10-06 18:00:00'},
+    ],
 }
 
-const initialPlan = {
-    title: 'event 1',
-    date: '2021-10-01'
+// const initialPlan = {
+//     title: 'event 1',
+//     date: '2021-10-01'
 
-}
+// }
 
 
 // middleware
