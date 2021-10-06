@@ -1,23 +1,18 @@
-import React from 'react'
-import FullCalendar from '@fullcalendar/react'
-import { Calendar } from '@fullcalendar/core';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import listPlugin from '@fullcalendar/list';
+import React from 'react';
+import {BrowserRouter, Route} from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
+import {history} from '../redux/configstore';
+
+import Calendar from '../pages/Calendar'
+
 
 function App() {
   return (
-    <div className="App">
-      <FullCalendar
-        plugins={[dayGridPlugin, timeGridPlugin,listPlugin]}
-        initialView="dayGridMonth"
-        weekends={false}
-        events={[
-          { title: 'event 1', date: '2021-10-01' },
-          { title: 'event 2', date: '2021-10-06' }
-        ]}
-        />
-    </div>
+    <React.Fragment>
+      <ConnectedRouter history = {history}>
+        <Route path='/'exact component={Calendar} />
+      </ConnectedRouter>
+    </React.Fragment>
   );
 }
 
