@@ -1,7 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
-import { firestore, storage } from '../../shared/firebase'; 
-
+import { firestore } from '../../shared/firebase'; 
+import moment from 'moment';
 
 // action
 const SET_PLAN = 'SET_PLAN';
@@ -20,11 +20,11 @@ const initialState ={
     ],
 }
 
-// const initialPlan = {
-//     title: 'event 1',
-//     date: '2021-10-01'
-
-// }
+const initialPlan = {
+    title: 'title',
+    date: '2021-10-14 10:00:00',
+    id:0
+}
 
 
 // middleware
@@ -52,6 +52,32 @@ const getPlanFB = () =>{
     }
 }
 
+const addPlanFB = (title, date) =>{
+    return function (dispatch, getState, {history}){
+        const planDB = firestore.collection('plans');
+
+        const _plan = {
+            ...initialPlan,
+            title:title,
+            date:moment(date).format('YYYY-MM-DD HH:mm:ss')
+        };
+        // console.log(_plan)
+
+        // id 추가
+        planDB
+        .add({..._plan})
+        .then((doc) =>{
+            let plan = {..._plan, id:doc.id};
+            console.log(plan);
+            // 리덕스에 추가
+            dispatch(addPlan(plan));
+            history.replace('/');
+        }).catch((err) =>{
+            console.log('일정 등록 실패', err)
+        })
+    }
+}
+
 // reducer
 export default handleActions(
     {
@@ -60,7 +86,7 @@ export default handleActions(
         }),
 
         [ADD_PLAN]: (state, action) => produce(state, (draft) =>{
-
+            draft.list.unshift(action.payload.plan)
         })
     },
     initialState
@@ -70,7 +96,8 @@ export default handleActions(
 const actionCreators ={
     setPlan,
     addPlan,
-    getPlanFB
+    getPlanFB,
+    addPlanFB
 }
 
 export {actionCreators}

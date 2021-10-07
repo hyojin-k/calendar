@@ -1,17 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-// import TextField from '@mui/material/TextField';
-// import AdapterDateFns from '@mui/lab/AdapterDateFns';
-// import LocalizationProvider from '@mui/lab/LocalizationProvider';
-// import DateTimePicker from '@mui/lab/DateTimePicker';
-// import DateAdapter from '@mui/lab/AdapterDateFns';
 
 import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 
 import {history} from '../redux/configstore'
-import { actionCreators as userActions} from '../redux/modules/calendar';
-import { useDispatch } from 'react-redux';
+import { actionCreators as planActions} from '../redux/modules/calendar';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Text from "../elements/Text";
 import Button from "../elements/Button";
@@ -20,22 +15,28 @@ import Input from '../elements/Input';
 const Add = (props) => {
   const dispatch = useDispatch();
   const [title, setTitle] = React.useState('')
-  const [selectedDate, handleDateChange] = useState(new Date());
+  const [selectedDate, setDateChange] = useState(new Date());
 
   const changeTitle = (e) =>{
       setTitle(e.target.value);
+      // console.log(e.target.value);
   }
 
-//   const add = () =>{
-//       dispatch(userActions.calendar({title:'카페가기'}))
-//   }
+  const handleDateChange = (date) =>{
+    setDateChange(date);
+    // console.log(date);
+  }
+
+  const addPlan = () =>{
+      dispatch(planActions.addPlanFB(title,selectedDate));
+  }
 
   return (
     <React.Fragment>
       <Container>
         <Wrap>
           <Text bold size='20px'>일정</Text>
-          <Input placeholder = '일정을 입력하세요' value= {title}  _onChange = {changeTitle} />
+          <Input placeholder = '일정을 입력하세요'  _onChange = {changeTitle} />
         </Wrap>
 
         <Wrap>
@@ -45,7 +46,6 @@ const Add = (props) => {
                 autoOk
                 ampm={false}
                 openTo='year'
-                // views={['year', 'month', 'day']}
                 value={selectedDate} 
                 onChange={handleDateChange}
                 format = 'yyyy-MM-dd HH:mm:ss'
@@ -57,7 +57,7 @@ const Add = (props) => {
           <Button width="auto" bgColor="#444" padding="8px 16px" margin="0 8px" _onClick={()=>{history.push('/')}}>
             취소
           </Button>
-          <Button width="auto" bgColor="#444" padding="8px 16px" margin="0 8px"_onClick={() =>{}}>
+          <Button width="auto" bgColor="#444" padding="8px 16px" margin="0 8px"_onClick={addPlan}>
             완료
           </Button>
         </Wrap>
