@@ -7,7 +7,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
 
 import { useSelector, useDispatch } from "react-redux";
-import { actionCreators as postActions } from "../redux/modules/calendar";
+import { actionCreators as planActions } from "../redux/modules/calendar";
 import { history } from "../redux/configstore";
 
 import Modal from '../components/Modal.js';
@@ -27,7 +27,7 @@ const Calendar = (props) => {
   })
 
   React.useEffect(() => {
-    dispatch(postActions.getPlanFB());
+    dispatch(planActions.getPlanFB());
   }, []);
 
   return (
