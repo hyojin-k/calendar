@@ -23,7 +23,7 @@ const Text = (props) =>{
 
 Text.defaultProps = {
     size:'14px',
-    color: '#444',
+    color: '#333',
     bold: false,
     margin: false,
     children: null,

@@ -21,7 +21,7 @@ Input.defaultProps = {
 
 const ElInput = styled.input`
     border: 1px solid #444;
-    width: 100%auto;
+    width: 60%;
     padding: 8px 12px;
     box-sizing: border-box;
 

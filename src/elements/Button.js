@@ -34,7 +34,6 @@ Button.defaultProps = {
     _onClick: () =>{},
     is_float: false, 
     width: 'auto',
-    // height:false,
     margin:false,
     padding:false,
     bgColor:'none',

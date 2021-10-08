@@ -39,12 +39,12 @@ const Add = (props) => {
     <React.Fragment>
       <Container>
         <Wrap>
-          <Text bold size='20px'>일정</Text>
+          <Text bold size='20px' color='sienna'>일정</Text>
           <Input placeholder = '일정을 입력하세요'  _onChange = {changeTitle} />
         </Wrap>
 
         <Wrap>
-          <Text bold size='20px'>일시</Text>
+          <Text bold size='20px' color='sienna'>일시</Text>
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <DateTimePicker 
                 autoOk
@@ -58,10 +58,10 @@ const Add = (props) => {
         </Wrap>
 
         <Wrap>
-          <Button width="auto" bgColor="#444" padding="8px 16px" margin="0 8px" _onClick={()=>{history.push('/')}}>
+          <Button bold width="auto" bgColor="goldenrod" padding="8px 16px" margin="0 8px" _onClick={()=>{history.push('/')}}>
             취소
           </Button>
-          <Button width="auto" bgColor="#444" padding="8px 16px" margin="0 8px"_onClick={addPlan}>
+          <Button bold width="auto" bgColor="goldenrod" padding="8px 16px" margin="0 8px"_onClick={addPlan}>
             완료
           </Button>
         </Wrap>
@@ -73,7 +73,7 @@ const Add = (props) => {
 const Container = styled.div`
   width: 50%;
   background-color: #fff;
-  border: 2px solid #dbdbdb;
+  border: 2px solid sienna;
   border-radius: 50px;
   text-align: center;
   padding: 50px 0;
