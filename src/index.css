@@ -11,3 +11,25 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.fc-toolbar-title{
+  color:sienna;
+  padding-left:20px;
+}
+.fc-toolbar-chunk{
+  padding: 20px 20px 0 0;
+}
+.fc-today-button {
+  background-color: sienna;
+}
+.fc-col-header-cell-cushion{
+  color: goldenrod;
+}
+.fc-daygrid-day-number{
+  color: sienna;
+}
+.fc-event-time{
+  color: goldenrod;
+}
+.fc-event-title{
+  color: #666;
+}
