@@ -28,7 +28,11 @@ const Add = (props) => {
   }
 
   const addPlan = () =>{
+    if(title === ''){
+      window.alert('일정을 입력해주세요')
+    }else {
       dispatch(planActions.addPlanFB(title,selectedDate));
+    }
   }
 
   return (
