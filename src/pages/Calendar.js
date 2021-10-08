@@ -19,6 +19,7 @@ const Calendar = (props) => {
   const [plan_info, setPlan] = useState();
   const [date_info, setDate] = useState();
   const [id_info, setId] = useState();
+  const [state_info, setState] = useState(false);
 
   const [planModalOn, setPlanModalOn] = useState(false);
 
@@ -33,6 +34,7 @@ const Calendar = (props) => {
     setPlan(target_plan[0].title) 
     setDate(target_plan[0].date)
     setId(target_plan[0].id)
+    setState(target_plan[0].completed)
     setPlanModalOn(true);
   }
 
@@ -46,6 +48,7 @@ const Calendar = (props) => {
       id:p.id,
       title: p.title,
       date: p.date,
+      color: p.completed ? 'tomato' : 'cornflowerblue'
     }
   })
 
@@ -79,7 +82,7 @@ const Calendar = (props) => {
 
 
       <div>
-      <PlanModal title={plan_info} date={date_info} id={id_info}  show={planModalOn} onHide={()=>setPlanModalOn(false) } />
+      <PlanModal title={plan_info} date={date_info} id={id_info} completed={state_info}  show={planModalOn} onHide={()=>setPlanModalOn(false) } />
 
       </div>
     </React.Fragment>

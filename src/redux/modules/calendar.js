@@ -6,11 +6,14 @@ import moment from 'moment';
 // action
 const SET_PLAN = 'SET_PLAN';
 const ADD_PLAN = 'ADD_PLAN';
+const UPDATE_PLAN = 'UPDATE_PLAN';
+const DELETE_PLAN = 'DELETE_PLAN';
 
 // action creators
 const setPlan = createAction(SET_PLAN, (plan_list) => ({plan_list}));
 const addPlan = createAction(ADD_PLAN, (plan) => ({plan}));
-
+const updatePlan = createAction(UPDATE_PLAN,(plan_id) => ({plan_id}));
+const deletePlan = createAction(DELETE_PLAN,(plan_id) =>({plan_id}));
 
 // initialState
 const initialState ={
@@ -23,7 +26,7 @@ const initialState ={
 const initialPlan = {
     title: 'title',
     date: '2021-10-14 10:00:00',
-
+    completed: false
 }
 
 
@@ -41,6 +44,7 @@ const setPlanFB = () =>{
                     id:doc.id,
                     title: doc.title,
                     date : doc.date,
+                    completed: doc.completed,
                     ...doc.data()
                 }
                 plan_list.push(plan);
@@ -60,7 +64,8 @@ const addPlanFB = (title, date) =>{
         const _plan = {
             ...initialPlan,
             title:title,
-            date:moment(date).format('YYYY-MM-DD HH:mm:ss')
+            date:moment(date).format('YYYY-MM-DD HH:mm:ss'),
+            completed: false
         };
         // console.log(_plan)
 
@@ -79,6 +84,18 @@ const addPlanFB = (title, date) =>{
     }
 }
 
+const updatePlanFB = (id) => {
+    return function (dispatch, getState, {history}){
+        const planDB = firestore.collection('plans');
+        planDB
+        .doc(id)
+        .update({completed:true})
+        .then(() =>{
+            dispatch(updatePlan(id))
+        }
+    }
+}
+
 // reducer
 export default handleActions(
     {
@@ -88,7 +105,7 @@ export default handleActions(
 
         [ADD_PLAN]: (state, action) => produce(state, (draft) =>{
             draft.list.unshift(action.payload.plan)
-        })
+        }),
     },
     initialState
 )
@@ -98,7 +115,8 @@ const actionCreators ={
     setPlan,
     addPlan,
     setPlanFB,
-    addPlanFB
+    addPlanFB,
+    updatePlanFB
 }
 
 export {actionCreators}
