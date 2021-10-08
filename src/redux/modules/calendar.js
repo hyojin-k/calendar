@@ -91,8 +91,20 @@ const updatePlanFB = (id) => {
         .doc(id)
         .update({completed:true})
         .then(() =>{
-            dispatch(updatePlan(id))
-        }
+            dispatch(setPlanFB())
+        })
+    }
+}
+
+const deletePlanFB = (id) =>{
+    return function (dispatch, getState, {history}){
+        const planDB = firestore.collection('plans');
+        planDB
+        .doc(id)
+        .delete()
+        .then(()=>{
+            dispatch(setPlanFB())
+        })
     }
 }
 
@@ -116,7 +128,8 @@ const actionCreators ={
     addPlan,
     setPlanFB,
     addPlanFB,
-    updatePlanFB
+    updatePlanFB,
+    deletePlanFB
 }
 
 export {actionCreators}

@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+// import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { Modal, Button } from "react-bootstrap";
 import { actionCreators as planActions} from '../redux/modules/calendar'
@@ -18,7 +18,7 @@ const PlanModal = ({ title, date, id, completed, show, onHide }) => {
       centered
     >
       {/* <Container> */}
-      <Modal.Header>
+      <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">오늘 할 일</Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -28,7 +28,10 @@ const PlanModal = ({ title, date, id, completed, show, onHide }) => {
         <p>{date} </p>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={onHide}>삭제</Button>
+        <Button onClick={()=>{
+          dispatch(planActions.deletePlanFB(id));
+          onHide();
+        }}>삭제</Button>
         <Button
           onClick={() => {
             dispatch(planActions.updatePlanFB(id));
