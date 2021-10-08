@@ -24,6 +24,8 @@
     "connected-react-router": "^6.8.0",
     "date-fns": "^2.25.0",
     "firebase": "^8.2.10",
+    "firebase-tools": "^9.20.0",
+    "global": "^4.4.0",
     "history": "^4.10.1",
     "immer": "^8.0.1",
     "moment": "^2.29.1",
