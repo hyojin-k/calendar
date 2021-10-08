@@ -23,12 +23,12 @@ const initialState ={
 const initialPlan = {
     title: 'title',
     date: '2021-10-14 10:00:00',
-    id:0
+
 }
 
 
 // middleware
-const getPlanFB = () =>{
+const setPlanFB = () =>{
     return function (dispatch, getState, {history}){
         const planDB = firestore.collection('plans');
 
@@ -39,8 +39,9 @@ const getPlanFB = () =>{
                 // console.log(doc.id, doc.data());
                 let plan = {
                     id:doc.id,
-                    title: doc.data().title,
-                    date : doc.data().date
+                    title: doc.title,
+                    date : doc.date,
+                    ...doc.data()
                 }
                 plan_list.push(plan);
             })
@@ -81,8 +82,8 @@ const addPlanFB = (title, date) =>{
 // reducer
 export default handleActions(
     {
-        [SET_PLAN]: (state, action) => produce(state, (draft) =>{
-            draft.list.push(...action.payload.plan_list);
+        [SET_PLAN]: (state, action) => produce(state, (draft) =>{       
+            draft.list = action.payload.plan_list
         }),
 
         [ADD_PLAN]: (state, action) => produce(state, (draft) =>{
@@ -96,7 +97,7 @@ export default handleActions(
 const actionCreators ={
     setPlan,
     addPlan,
-    getPlanFB,
+    setPlanFB,
     addPlanFB
 }
 
